@@ -1,0 +1,16 @@
+notifications:
+  email: false
+  slack: geekshubs:rrvY2RwjwpXwVTW3jjcW8JYg
+  
+language: node_js
+node_js:
+  - '12'
+stages:
+  -test 
+before_install:
+  - case $(wc -l < ./test/test01.js) in 5)  ;;  *) exit 1 ;; esac
+  - if [ $(wc -w < ./test/test01.js) -gt 20]; then exit 1; fi
+before_script:
+  - npm ci
+script:
+  - npm test
